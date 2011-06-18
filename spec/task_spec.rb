@@ -11,18 +11,24 @@ describe Thor::Task do
 
   describe "#formatted_usage" do
     it "includes namespace within usage" do
-      object = Struct.new(:namespace, :arguments).new("foo", [])
-      task(:bar => :required).formatted_usage(object).should == "foo:can_has --bar=BAR"
+      Object.stub!(:namespace).and_return("foo")
+      Object.stub!(:arguments).and_return([])
+      Object.stub!(:parent_commands).and_return([])
+      task(:bar => :required).formatted_usage(Object).should == "foo:can_has --bar=BAR"
     end
 
     it "removes default from namespace" do
-      object = Struct.new(:namespace, :arguments).new("default:foo", [])
-      task(:bar => :required).formatted_usage(object).should == ":foo:can_has --bar=BAR"
+      Object.stub!(:namespace).and_return("default:foo")
+      Object.stub!(:arguments).and_return([])
+      Object.stub!(:parent_commands).and_return([])
+      task(:bar => :required).formatted_usage(Object).should == ":foo:can_has --bar=BAR"
     end
 
     it "injects arguments into usage" do
-      object = Struct.new(:namespace, :arguments).new("foo", [Thor::Argument.new(:bar, nil, true, :string)])
-      task(:foo => :required).formatted_usage(object).should == "foo:can_has BAR --foo=FOO"
+      Object.stub!(:namespace).and_return("foo")
+      Object.stub!(:arguments).and_return([ Thor::Argument.new(:bar, nil, true, :string) ])
+      Object.stub!(:parent_commands).and_return([])
+      task(:foo => :required).formatted_usage(Object).should == "foo:can_has BAR --foo=FOO"
     end
   end
 
