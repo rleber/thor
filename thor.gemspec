@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rdoc", "~> 2.5"
   s.add_development_dependency "rspec", "~> 2.3"
   s.add_development_dependency "simplecov", "~> 0.4"
-  s.authors = ['Yehuda Katz', 'José Valim']
+  s.authors = ['Yehuda Katz', 'José Valim', 'Richard LeBer']
   s.description = %q{A scripting framework that replaces rake, sake and rubigen}
   s.email = 'ruby-thor@googlegroups.com'
   s.executables = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f)}
