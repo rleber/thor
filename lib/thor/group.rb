@@ -220,10 +220,14 @@ class Thor::Group
         args, opts = Thor::Options.split(given_args)
         opts = given_opts || opts
 
+        instance = new(args, opts, config)
+        yield instance if block_given?
+        args = instance.args
+
         if task
-          new(args, opts, config).invoke_task(all_tasks[task])
+          instance.invoke_task(all_tasks[task])
         else
-          new(args, opts, config).invoke_all
+          instance.invoke_all
         end
       end
 

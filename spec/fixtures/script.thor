@@ -79,11 +79,11 @@ END
   method_option :lazy_array,   :type => :array,   :lazy_default => %w[eat at joes]
   method_option :lazy_hash,    :type => :hash,    :lazy_default => {'swedish' => 'meatballs'}
   desc "with_optional NAME", "invoke with optional name"
-  def with_optional(name=nil)
-    [ name, options ]
+  def with_optional(name=nil, *args)
+    [ name, options, args ]
   end
 
-  method_option :repeater, :type=>:string, :default='foo', :repeats=>true
+  method_option :repeater, :type=>:string, :default=>'foo', :repeats=>true
   method_option :other, :type=>:boolean
   desc "with_repeater NAME", "invoke with optional name"
   def with_repeater(name=nil)
@@ -226,5 +226,6 @@ class WithArgsOnDefaultTask < Thor
     def example_default_task(*args)
       ["default task", options, args]
     end
+  end
 end
 
