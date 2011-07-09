@@ -12,6 +12,9 @@ describe Thor::Task do
   describe "#formatted_usage" do
     it "includes namespace within usage" do
       Object.stub!(:namespace).and_return("foo")
+      class << Object
+        public :namespace
+      end
       Object.stub!(:arguments).and_return([])
       Object.stub!(:parent_commands).and_return([])
       task(:bar => :required).formatted_usage(Object).should == "foo:can_has --bar=BAR"
@@ -19,6 +22,9 @@ describe Thor::Task do
 
     it "removes default from namespace" do
       Object.stub!(:namespace).and_return("default:foo")
+      class << Object
+        public :namespace
+      end
       Object.stub!(:arguments).and_return([])
       Object.stub!(:parent_commands).and_return([])
       task(:bar => :required).formatted_usage(Object).should == ":foo:can_has --bar=BAR"
@@ -26,6 +32,9 @@ describe Thor::Task do
 
     it "injects arguments into usage" do
       Object.stub!(:namespace).and_return("foo")
+      class << Object
+        public :namespace
+      end
       Object.stub!(:arguments).and_return([ Thor::Argument.new(:bar, nil, true, :string) ])
       Object.stub!(:parent_commands).and_return([])
       task(:foo => :required).formatted_usage(Object).should == "foo:can_has BAR --foo=FOO"

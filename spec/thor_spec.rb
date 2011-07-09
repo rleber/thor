@@ -259,7 +259,7 @@ describe Thor do
   describe "#subcommand" do
     it "maps a given subcommand to another Thor subclass" do
       barn_help = capture(:stdout){ Scripts::MyDefaults.start(["barn"]) }
-      barn_help.should include("barn help [COMMAND]  # Describe subcommands or one specific subcommand")
+      barn_help.should include "barn help [COMMAND]  # Describe subcommands or one specific subcommand"
     end
 
     it "passes commands to subcommand classes" do

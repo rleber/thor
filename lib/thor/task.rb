@@ -91,7 +91,8 @@ class Thor
     end
 
     def private_method?(instance)
-      !(instance.private_methods & [name.to_s, name.to_sym]).empty?
+      !(instance.private_methods & [name.to_s, name.to_sym]).empty? &&
+      (instance.public_methods & [name.to_s, name.to_sym]).empty?
     end
 
     def local_method?(instance, name)
